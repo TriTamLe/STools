@@ -1,0 +1,6 @@
+.tagslist {
+  text-align: center;
+  display: block;
+  flex-direction: row;
+  gap: 1rem;
+}
