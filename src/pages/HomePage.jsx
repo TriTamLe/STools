@@ -1,10 +1,6 @@
 import { defer } from 'react-router-dom';
 import Home from '../components/Home';
-import { createClient } from '@supabase/supabase-js';
-const supabase = createClient(
-  import.meta.env.VITE_URL,
-  import.meta.env.VITE_ANON_KEY,
-);
+import { getData } from '../server';
 
 function HomePage() {
   return <Home />;
@@ -13,11 +9,11 @@ function HomePage() {
 export default HomePage;
 
 export const loaderTags = async () => {
-  return await supabase.from('Tag').select('*');
+  return await getData('Tag');
 };
 
 export const loaderSkills = async () => {
-  return await supabase.from('Skills').select('*');
+  return await getData('Skills');
 };
 
 export const loader = async () => {
