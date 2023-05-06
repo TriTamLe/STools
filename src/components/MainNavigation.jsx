@@ -24,8 +24,9 @@ const MainNavigation = () => {
         <li className={classes.guide}>
           <Link to='/skills'>Hướng dẫn sử dụng</Link>
         </li>
-        <li>
-          <Link to='https://untools.co/'>Nguồn sao chép</Link>
+        <li className={classes.right}>
+          <Link to='https://untools.co/'>Nguồn sao chép</Link>{' '}
+          <Link to='/skills/create'>Thêm kỹ năng</Link>
         </li>
       </ul>
     </div>

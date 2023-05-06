@@ -3,19 +3,23 @@ import RootPage from './pages/RootPage';
 import HomePage, { loader as homeLoader } from './pages/HomePage';
 import GuidePage from './pages/GuidePage';
 import ErrorPage from './pages/ErrorPage';
-import ContructoringPage from './pages/ConstructoringPage';
+import NewSkillPage from './pages/NewsSkillPage';
+import { action as newSkillAction } from './components/NewSkillForm';
+import SKillContentPage, {
+  loader as contentLoader,
+} from './pages/SkillContentPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootPage />,
     errorElement: <ErrorPage />,
+    id: 'home',
+    loader: homeLoader,
     children: [
       {
         index: true,
         element: <HomePage />,
-        id: 'home',
-        loader: homeLoader,
       },
       {
         path: 'skills',
@@ -24,9 +28,16 @@ const router = createBrowserRouter([
             index: true,
             element: <GuidePage />,
           },
+
           {
-            path: ':id',
-            element: <ContructoringPage />,
+            path: ':skillId',
+            element: <SKillContentPage />,
+            loader: contentLoader,
+          },
+          {
+            path: 'create',
+            element: <NewSkillPage />,
+            action: newSkillAction,
           },
         ],
       },

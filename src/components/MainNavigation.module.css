@@ -8,3 +8,7 @@
   list-style: none;
   font-size: 20px;
 }
+.right {
+  display: flex;
+  gap: 2rem;
+}

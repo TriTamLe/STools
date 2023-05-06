@@ -1,12 +1,12 @@
 import { Suspense, useState } from 'react';
 import TagListButton from '../components/TagListButtons';
 import classes from './Home.module.css';
-import { Await, useLoaderData } from 'react-router-dom';
+import { Await, useRouteLoaderData } from 'react-router-dom';
 import SkillList from './SkillList';
 
 function Home() {
   const [idActive, setIdActive] = useState('all');
-  const homeData = useLoaderData();
+  const homeData = useRouteLoaderData('home');
 
   const setActive = id => {
     setIdActive(id);
