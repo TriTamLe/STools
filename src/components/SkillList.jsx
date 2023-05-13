@@ -1,23 +1,26 @@
-import { Await, useRouteLoaderData } from 'react-router-dom';
+import { Await } from 'react-router-dom';
 import SkillCard from './SkillCard';
 import classes from './SkillList.module.css';
 import { Suspense } from 'react';
+import { useStore } from '../store';
 
 const SkillList = ({ idActive }) => {
-  const homeData = useRouteLoaderData('home');
+  const store = useStore()[0];
 
   return (
     <Suspense fallback={<p>Đang tải các kỹ năng...</p>}>
-      <Await resolve={homeData.skillsData}>
+      <Await resolve={store.skills}>
         {skills => {
-          let skillsdata = skills.data;
+          let skillsdata = skills;
           if (idActive !== 'all') {
-            skillsdata = skills.data.filter(ele => ele.tagId === idActive);
+            skillsdata = skills.filter(ele => ele.tagId === idActive);
           }
           return (
             <div className={classes.skillList}>
               {skillsdata.map(skill => {
-                return <SkillCard key={skill.id} skill={skill} />;
+                return (
+                  <SkillCard key={skill.id} skill={skill} disabled={false} />
+                );
               })}
             </div>
           );

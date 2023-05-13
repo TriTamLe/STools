@@ -11,8 +11,9 @@ import { v4 as uuid } from 'uuid';
 import { Suspense, useRef, useState } from 'react';
 import classes from './NewSkillForm.module.css';
 import TextEditor from './TextEditor';
-import { compressSVG, compressString, createBinFile } from '../util';
-import { postData, uploadFile } from '../server';
+import { compressSVG, createHTMLFile } from '../util';
+import { getFileURL, uploadFile, postData } from '../server';
+import { useEffect } from 'react';
 
 const NewSkillForm = () => {
   const homeLoader = useRouteLoaderData('home');
@@ -30,14 +31,17 @@ const NewSkillForm = () => {
     }
   };
 
-  const submitForm = async () => {
+  useEffect(() => {
     setState(fetcher.state === 'submitting');
+  }, [fetcher.state]);
+
+  const submitForm = async () => {
     const body = {
       title: title,
       tagId: tagId,
       description: description,
       icon: compressSVG(svgString),
-      content: await compressString(logContent()),
+      content: logContent(),
     };
     fetcher.submit(body, { method: 'POST' });
   };
@@ -113,7 +117,13 @@ export default NewSkillForm;
 export const action = async ({ request }) => {
   const fdata = await request.formData();
   const toolId = uuid();
-  const arrayContent = fdata.get('content');
+  const content = fdata.get('content');
+
+  const file = createHTMLFile(content, toolId);
+  const uploadFileResponse = await uploadFile(file);
+  console.log(uploadFileResponse);
+
+  const fileURL = await getFileURL('STools', uploadFileResponse.path);
 
   const body = {
     id: toolId,
@@ -121,6 +131,7 @@ export const action = async ({ request }) => {
     icon: fdata.get('icon'),
     tagId: fdata.get('tagId'),
     description: fdata.get('description'),
+    fileURL: await fileURL.publicUrl,
   };
 
   const response = await postData('Skills', body);
@@ -129,10 +140,5 @@ export const action = async ({ request }) => {
     throw json({ message: 'can not add skills' }, { status: 402 });
   }
 
-  arrayContent.then(data => {
-    console.log(data);
-    uploadFile(createBinFile(data), toolId);
-  });
-
-  return redirect('/');
+  return redirect('..');
 };

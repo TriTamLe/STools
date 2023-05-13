@@ -4,9 +4,10 @@
 }
 
 .skillcard {
-  max-width: 26rem;
+  max-width: 100%;
   min-width: 13rem;
-  max-height: 30rem;
+  min-height: 10rem;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   padding: 3rem;

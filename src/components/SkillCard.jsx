@@ -3,11 +3,15 @@ import classes from './SkillCard.module.css';
 import SVGImage from './SVGImage';
 import Tag from './Tag';
 
-const SkillCard = ({ skill }) => {
+const SkillCard = ({ skill, disabled }) => {
   const { id, title, icon, tagId, description } = skill;
 
   return (
-    <Link className={classes.skillcard} to={`/skills/${id}`}>
+    <Link
+      className={classes.skillcard}
+      to={`/skills/${id}`}
+      disabled={disabled}
+    >
       <div className={classes.skillIcon}>
         <SVGImage svgString={icon} width='50%' height='100%' />
       </div>

@@ -16,10 +16,24 @@ export const postData = async (table, row) => {
 export const uploadFile = async file => {
   const { data, error } = await supabase.storage
     .from('STools')
-    .upload('/tool-content/', file);
+    .upload(`/tool-content/${file.name}`, file);
   if (error) {
+    console.log(error);
     throw new Error('Can not upload the file');
   } else {
-    console.log('Success fetching!', data);
+    return data;
+  }
+};
+
+export const getFileURL = async (bucketName, filePath) => {
+  console.log(bucketName, filePath);
+  const { data, error } = await supabase.storage
+    .from(bucketName)
+    .getPublicUrl(filePath);
+  if (error) {
+    throw new Error({ message: error.message });
+  } else {
+    console.log(data.publicUrl);
+    return data;
   }
 };
