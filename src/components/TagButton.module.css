@@ -2,8 +2,9 @@
   margin: 0.5rem;
   background-color: var(--bg-color);
   color: var(--text-color);
-  border: 3px solid var(--bd-Color);
+  border: 0.2rem solid var(--bd-Color);
   transition: 300ms;
+  font-size: 1.5rem;
 }
 .tagbutton:hover,
 .tagbutton:focus,

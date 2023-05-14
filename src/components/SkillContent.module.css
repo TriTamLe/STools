@@ -1,6 +1,6 @@
 .skillContent {
   padding: 3rem 1rem 1rem 1rem;
-  max-width: 50rem;
+  max-width: 60rem;
   min-width: 30rem;
   position: relative;
   left: 50%;
@@ -10,8 +10,9 @@
   gap: 2rem;
 }
 .headerCard {
+  position: relative;
   align-self: center;
-  max-width: 90rem;
+  max-width: 80rem;
   height: auto;
   display: flex;
   gap: 3rem;
@@ -23,10 +24,10 @@
 }
 
 .headerCard .skillInfo .skillTitle {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 .headerCard .skillInfo .skillDes {
-  font-size: 1rem;
+  font-size: 1.8rem;
   text-align: justify;
 }
 
@@ -45,7 +46,7 @@
 }
 .content h3 {
   margin-top: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .content table {
@@ -73,7 +74,7 @@
 .content p {
   width: 100%;
   text-align: justify;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
 }
 
 .content p img {
@@ -82,17 +83,20 @@
   max-width: 100%;
   min-width: 20rem;
   height: auto;
-  box-shadow: 0 0.3rem 1.3rem rgba(0, 0, 0, 0.12);
-  border-radius: 0.5rem;
 }
 
-.content ul {
+.content ul,
+.content ol {
   width: 100%;
   text-align: justify;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.content a {
+  font-size: 1.6rem;
 }
 
 .skillContent::after {

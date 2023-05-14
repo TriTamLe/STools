@@ -36,7 +36,7 @@ const SKillContent = ({ skill }) => {
           </div>
         </div>
         <div className={classes.content}>
-          <Suspense fallback={<p>Đang tải nội dung</p>}>
+          <Suspense fallback={<p>Đang tải nội dung...</p>}>
             <Await resolve={fetchContent()}>
               {response => {
                 return <div dangerouslySetInnerHTML={{ __html: response }} />;
