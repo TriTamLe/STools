@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import TagButton from './TagButton';
 import classes from './TagListButton.module.css';
 

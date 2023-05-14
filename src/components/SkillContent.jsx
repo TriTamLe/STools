@@ -3,9 +3,10 @@ import classes from './SkillContent.module.css';
 import SVGImage from './SVGImage';
 import Tag from './Tag';
 import { useStore } from '../store';
+import { Suspense } from 'react';
 
 const SKillContent = ({ skill }) => {
-  const { fileURL, id, title, icon, tagId, description } = skill;
+  const { fileURL, title, icon, tagId, description } = skill;
   const [htmlContent, setHtmlContent] = useState('');
   const store = useStore()[0];
 
@@ -38,9 +39,11 @@ const SKillContent = ({ skill }) => {
           </div>
         </div>
 
-        <div className={classes.content}>
-          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-        </div>
+        <Suspense fallback={<p>Đang tải nội dung</p>}>
+          <div className={classes.content}>
+            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+          </div>
+        </Suspense>
       </div>
     </>
   );
