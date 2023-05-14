@@ -1,13 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import RootPage from './pages/RootPage';
-import HomePage, { loader as homeLoader } from './pages/HomePage';
-import GuidePage from './pages/GuidePage';
-import ErrorPage from './pages/ErrorPage';
-import NewSkillPage from './pages/NewsSkillPage';
-import { action as newSkillAction } from './components/NewSkillForm';
-import SKillContentPage, {
-  loader as contentLoader,
-} from './pages/SkillContentPage';
+import { lazy } from 'react';
+
+const RootPage = lazy(() => import('./pages/RootPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const GuidePage = lazy(() => import('./pages/GuidePage'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
+const NewSkillPage = lazy(() => import('./pages/NewsSkillPage'));
+const SKillContentPage = lazy(() => import('./pages/SkillContentPage'));
 
 const router = createBrowserRouter([
   {
@@ -15,7 +14,7 @@ const router = createBrowserRouter([
     element: <RootPage />,
     errorElement: <ErrorPage />,
     id: 'home',
-    loader: homeLoader,
+    loader: () => import('./pages/HomePage').then(module => module.loader()),
     children: [
       {
         index: true,
@@ -32,12 +31,18 @@ const router = createBrowserRouter([
           {
             path: ':skillId',
             element: <SKillContentPage />,
-            loader: contentLoader,
+            loader: meta =>
+              import('./pages/SkillContentPage').then(module =>
+                module.loader(meta),
+              ),
           },
           {
             path: 'create',
             element: <NewSkillPage />,
-            action: newSkillAction,
+            action: meta =>
+              import('./components/NewSkillForm').then(module =>
+                module.action(meta),
+              ),
           },
         ],
       },

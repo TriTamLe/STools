@@ -4,19 +4,16 @@ import SVGImage from './SVGImage';
 import Tag from './Tag';
 import { useStore } from '../store';
 import { Suspense } from 'react';
+import { Await } from 'react-router-dom';
 
 const SKillContent = ({ skill }) => {
   const { fileURL, title, icon, tagId, description } = skill;
-  const [htmlContent, setHtmlContent] = useState('');
   const store = useStore()[0];
 
   const tag = store.tags.find(tag => tag.id === tagId);
-
-  useEffect(() => {
-    fetch(fileURL)
-      .then(response => response.text())
-      .then(data => setHtmlContent(data));
-  }, []);
+  const fetchContent = async () => {
+    return fetch(fileURL).then(response => response.text());
+  };
 
   return (
     <>
@@ -38,12 +35,15 @@ const SKillContent = ({ skill }) => {
             <p className={classes.skillDes}>{description}</p>
           </div>
         </div>
-
-        <Suspense fallback={<p>Đang tải nội dung</p>}>
-          <div className={classes.content}>
-            <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-          </div>
-        </Suspense>
+        <div className={classes.content}>
+          <Suspense fallback={<p>Đang tải nội dung</p>}>
+            <Await resolve={fetchContent()}>
+              {response => {
+                return <div dangerouslySetInnerHTML={{ __html: response }} />;
+              }}
+            </Await>
+          </Suspense>
+        </div>
       </div>
     </>
   );
