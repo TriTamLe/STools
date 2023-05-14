@@ -55,8 +55,7 @@
   border: 1.5px solid #333333;
 }
 
-.content table thead,
-.content tr td:first-child {
+.content table thead {
   background-color: #f0eeea;
   font-weight: 700;
   border: 1.5px solid #333333;
