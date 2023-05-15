@@ -1,6 +1,6 @@
 .skillContent {
   padding: 3rem 1rem 1rem 1rem;
-  max-width: 60rem;
+  max-width: 80rem;
   min-width: 30rem;
   position: relative;
   left: 50%;
@@ -22,7 +22,12 @@
   border-radius: 1rem;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.12);
 }
-
+.headerCard .skillIcon {
+  max-width: 50%;
+  min-width: 20rem;
+  height: auto;
+  padding: 2rem;
+}
 .headerCard .skillInfo .skillTitle {
   font-size: 4rem;
 }
@@ -68,6 +73,7 @@
   border: 1.5px solid #333333;
   width: fit-content;
   padding: 1rem;
+  font-size: 1.5rem;
 }
 
 .content p {

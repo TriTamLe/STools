@@ -25,7 +25,7 @@ const SKillContent = ({ skill }) => {
       >
         <div className={classes.headerCard}>
           <div className={classes.skillIcon}>
-            <SVGImage svgString={icon} width='100%' height='auto' />
+            <SVGImage svgString={icon} width='100%' height='100%' />
           </div>
           <div className={classes.skillInfo}>
             <h2 className={classes.skillTitle}>{title}</h2>
@@ -36,7 +36,7 @@ const SKillContent = ({ skill }) => {
           </div>
         </div>
         <div className={classes.content}>
-          <Suspense fallback={<p>Đang tải nội dung...</p>}>
+          <Suspense fallback={<h3>Đang tải nội dung...</h3>}>
             <Await resolve={fetchContent()}>
               {response => {
                 return <div dangerouslySetInnerHTML={{ __html: response }} />;
