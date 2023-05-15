@@ -7,8 +7,22 @@
   padding-right: 10px;
   list-style: none;
   font-size: 20px;
+  padding-top: 20px;
 }
 .right {
   display: flex;
   gap: 2rem;
+}
+
+.logo {
+  font-weight: bold;
+  font-weight: 900;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+:hover {
+  .logo {
+    text-decoration: none;
+  }
 }
